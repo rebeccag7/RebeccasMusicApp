@@ -1,29 +1,54 @@
 <?php
 	class Account {
-		public function __construct() {
 
+		private $errorArray;
+
+		public function __construct() {
+			$this->errorArray = array();
 		}
 
-		public function register() {
-			$this->validateUsername($username);
-			$this->validateFistName($firstName);
-			$this->validateLastName($lastName);
-			$this->validateEmails($email, $email2);
-			$this->validatePasswords($password, $password2);
+		public function register($un, $fn, $ln, $em, $em2, $pw, $pw2) {
+			$this->validateUsername($un);
+			$this->validateFistName($fn);
+			$this->validateLastName($ln);
+			$this->validateEmails($em, $em);
+			$this->validatePasswords($pw, $pw2);
 		}
 
 		private function validateUsername($un) {
-			echo "username function called";
+			if (strlen($un) > 25 || strlen($un) < 5) {
+				array_push($this->errorArray, "Yout username must be between 5 and 25 characters");
+				return;
+			}
 		}
+
 		private function validateFistName($fn) {
-	
+			if (strlen($fn) > 25 || strlen($fn) < 2) {
+				array_push($this->errorArray, "Yout first name must be between 2 and 25 characters");
+				return;
+			}
 		}
+
 		private function validateLastName($ln) {
-	
+			if (strlen($ln) > 25 || strlen($ln) < 2) {
+				array_push($this->errorArray, "Yout last name must be between 2 and 25 characters");
+				return;
+			}
 		}
+
 		private function validateEmails($em, $em2) {
-	
+			if($em != $em2) {
+				array_push($this->errorArray, "Your emails don't match");
+				return;
+			}
+			if (!filter_var($em, FILTER_VALIDATE_EMAIL)) {
+				array_push($this->errorArray, "Email is invalid");
+				return;
+			}
+
+			// TODO: Check that the username hasn't already been used
 		}
+
 		private function validatePasswords($pw, $pw2) {
 	
 		}
