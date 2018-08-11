@@ -1,9 +1,11 @@
 <?php
 	class Account {
 
+		private $con;
 		private $errorArray;
 
-		public function __construct() {
+		public function __construct($con) {
+			$this->con = $con;
 			$this->errorArray = array();
 		}
 
@@ -14,9 +16,9 @@
 			$this->validateEmails($em, $em2);
 			$this->validatePasswords($pw, $pw2);
 
-			if (empty($this->errorArray)) {
+			if (empty($this->errorArray) == true) {
 				// Insert into db
-				return true;
+				return $this->insertUserDetails($un, $fn, $ln, $em, $pw);
 			} else {
 				return false;
 			}
@@ -27,6 +29,25 @@
 				$error = "";
 			}
 			return "<span class='errorMessage'>$error</span>";
+		}
+
+		private function insertUserDetails($un, $fn, $ln, $em, $pw) {
+
+			$encryptedPw = md5($pw);
+
+			$profilePic = "assets/images/profile-pics/male_emerald.jpg";
+
+			$date = date("Y-m-d");
+
+			$result = "INSERT INTO users (username, firstName, lastName, email, password, signUpDate, profilePic) VALUES ('$un', '$fn', '$ln', '$em', '$encryptedPw', '$date', '$profilePic')";
+
+			if ($this->con->query($result) === TRUE) {
+			    echo "New record created successfully";
+			} else {
+			    echo "Error: " . $result . "<br>" . $this->con->error;
+			}
+
+			return $result;
 		}
 
 		private function validateUsername($un) {
