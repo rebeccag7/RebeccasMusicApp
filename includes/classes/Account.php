@@ -57,6 +57,11 @@
 			}
 
 			// TODO: Check if username exists
+			$checkUsernameQuery = mysqli_query($this->con, "SELECT username FROM users WHERE username='$un'");
+			if(mysqli_num_rows($checkUsernameQuery) != 0) {
+				array_push($this->errorArray, Constants::$usernameTaken);
+				return;
+			}
 		}
 
 		private function validateFistName($fn) {
@@ -75,7 +80,7 @@
 
 		private function validateEmails($em, $em2) {
 			if($em != $em2) {
-				array_push($this->errorArray, Constants::$emilsDoNotMatch);
+				array_push($this->errorArray, Constants::$emailsDoNotMatch);
 				return;
 			}
 			if (!filter_var($em, FILTER_VALIDATE_EMAIL)) {
@@ -84,6 +89,11 @@
 			}
 
 			// TODO: Check that the username hasn't already been used
+			$checkEmailQuery = mysqli_query($this->con, "SELECT email FROM users WHERE email='$em'");
+			if(mysqli_num_rows($checkEmailQuery) != 0) {
+				array_push($this->errorArray, Constants::$emailTaken);
+				return;
+			}
 		}
 
 		private function validatePasswords($pw, $pw2) {
