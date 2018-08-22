@@ -36,9 +36,12 @@
 						<input id="loginPassword" name="loginPassword" type="password" required>
 					</p>
 					<button type="submit" name="loginButton">LOG IN</button>	
+					<div class="hasAccountText">
+						<span id="hideLogin">Don't have an account yet? Signup here.</span>
+					</div>
 				</form>
 
-				<form id="loginForm" action="register.php" method="POST">
+				<form id="registerForm" action="register.php" method="POST">
 					<h2>Create your free account</h2>
 					<p>
 						<?php echo $account->getError(Constants::$usernameCharacters); ?>
@@ -79,6 +82,9 @@
 						<input id="password2" name="password2" type="password" required>
 					</p>
 					<button type="submit" name="registerButton">Sign Up!</button>	
+					<div class="hasAccountText">
+						<span id="hideRegister">Alreadt have an account yet? Login here.</span>
+					</div>
 				</form>
 			</div>
 		</div>
