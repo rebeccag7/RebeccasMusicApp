@@ -18,7 +18,11 @@
 <html>
 <head>
 	<title>Welcome to Rebecca's Music App!</title>
+
 	<link rel="stylesheet" type="text/css" href="assets/css/register.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="assets/js/register.js"></script>
 </head>
 <body>
 	<div id="background">
@@ -83,7 +87,7 @@
 					</p>
 					<button type="submit" name="registerButton">Sign Up!</button>	
 					<div class="hasAccountText">
-						<span id="hideRegister">Alreadt have an account yet? Login here.</span>
+						<span id="hideRegister">Already have an account yet? Login here.</span>
 					</div>
 				</form>
 			</div>
